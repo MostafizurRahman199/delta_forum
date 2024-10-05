@@ -5,7 +5,29 @@ const getById = (id)=>{
 const post_container = getById("post_container");
 const markAsReadContainer = getById("markAsReadContainer");
 const markAsReadCounter = getById("markAsReadCounter");
+const searchPosts = getById("searchPosts");
+const searchPostsBtn = getById("searchPostsBtn");
 let counter = 0;
+
+
+const handleSearchByCategory = ()=>{
+    
+    const category = searchPosts.value.trim();
+    loadBySearch(category);
+     
+
+
+}
+
+
+const loadBySearch = async(search)=>{
+
+    let data = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${search}`)
+    data = await data.json();
+    let posts = data.posts;
+    console.log(posts)
+    displayAllPost(posts);
+}
 
 const loadAllPost = async()=>{
     let data = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts`);
@@ -62,7 +84,7 @@ const markAsRead = (title, views)=>{
 
 
 const displayAllPost = (posts)=>{
-   
+    post_container.innerHTML = "";
 
     posts.map((post)=>{
         console.log(post.category);
@@ -113,7 +135,7 @@ const displayAllPost = (posts)=>{
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                           </svg>
                           
-                          <p class="text-sm text-gray-500">${post.view_count}</p>
+                          <p class="text-sm text-gray-500">${post.view_count}K</p>
                         </div>
                         <div class="flex gap-2  items-center">
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
