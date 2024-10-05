@@ -7,7 +7,10 @@ const markAsReadContainer = getById("markAsReadContainer");
 const markAsReadCounter = getById("markAsReadCounter");
 const searchPosts = getById("searchPosts");
 const searchPostsBtn = getById("searchPostsBtn");
+const latest_post_container = getById("latest_post_container");
+
 let counter = 0;
+
 
 
 const handleSearchByCategory = ()=>{
@@ -16,6 +19,23 @@ const handleSearchByCategory = ()=>{
     loadBySearch(category);
      
 
+
+}
+/**
+ * 
+ * {
+    "name": "John Doe",
+    "designation": "ROR Developer",
+    "posted_date": "29 January 2024"
+}
+ */ 
+
+
+const loadLatestPost = async ()=>{
+    let data = await fetch(`https://openapi.programming-hero.com/api/retro-forum/latest-posts`);
+    data = await data.json();
+    displayLatestPost(data);
+    console.log(data);
 
 }
 
@@ -87,14 +107,14 @@ const displayAllPost = (posts)=>{
     post_container.innerHTML = "";
 
     posts.map((post)=>{
-        console.log(post.category);
-        console.log(post.title);
-        console.log(post.author.name);
-        console.log(post.description);
-        console.log(post.comment_count);
-        console.log(post.view_count);
-        console.log(post.posted_time);
-        console.log("---------------------------------");
+        // console.log(post.category);
+        // console.log(post.title);
+        // console.log(post.author.name);
+        // console.log(post.description);
+        // console.log(post.comment_count);
+        // console.log(post.view_count);
+        // console.log(post.posted_time);
+        // console.log("---------------------------------");
 
         const div = document.createElement("div");
         div.innerHTML = `
@@ -163,5 +183,77 @@ const displayAllPost = (posts)=>{
 }
 
 
+/**
+ * {
+    "cover_image": "https://i.ibb.co/VYGSkLz/pexels-jeshootscom-442576.jpg",
+    "profile_image": "https://i.ibb.co/z8zx95w/pexels-davide-de-giovanni-1649675.jpg",
+    "title": "Gaming Enthusiast Expert in Play",
+    "description": "Leading gaming expert with a wealth of knowledge and passion for all things gaming",
+    "author": {
+        "name": "John Doe",
+        "designation": "ROR Developer",
+        "posted_date": "29 January 2024"
+    }
+}
+ * 
+ */
+const displayLatestPost = (posts)=>{
+
+  console.log(posts);
+
+posts.map((post)=>{
+    
+    const div = document.createElement('div');
+    div.innerHTML = `<div class="card lg:w-96 pb-5 bg-base-100 shadow-2xl">
+          <figure class="lg:px-6 px-4 pt-4 lg:pt-8">
+              <img
+                  src=${post.cover_image}
+                  alt="Shoes"
+                  class="rounded-xl"
+              />
+          </figure>
+          <div class="p-5 lg:p-10 space-y-4 lg:space-y-5">
+              <p class="opacity-50 text-start">
+                  <i class="fa-solid fa-calendar-days me-2"></i>${post?.author?.posted_date || "No Publish Date"}
+              </p>
+              <h2 class="card-title text-start">title</h2>
+              <p class="text-start">
+                 ${post.description}
+              </p>
+              <div class="card-actions flex gap-5 items-center">
+                  <div class="avatar">
+                      <div
+                          class="lg:w-12 w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+                      >
+                          <img
+                          src=${post.profile_image}
+                          />
+                      </div>
+                  </div>
+              <div>
+              <h3 class="text-start font-extrabold">author.name</h3>
+              <p class="text-start opacity-60">${post?.author?.designation || "Unknown"}</p>
+          </div>
+      </div>
+        
+
+          <span
+            id="latestPostLoader"
+            class="loading loading-infinity loading-lg lg:mt-24 text-primary hidden"
+          >
+        
+        </span>
+          <!-- dynamic content -->
+        </div>
+        </div>`
+
+        latest_post_container.appendChild(div)
+})
+
+
+}
+
+
 
 loadAllPost();
+loadLatestPost();
