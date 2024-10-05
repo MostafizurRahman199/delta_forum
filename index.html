@@ -90,7 +90,7 @@
             class="hero-content text-neutral-content py-12 lg:py-48 lg:flex-row flex-col gap-8 lg:gap-14"
           >
             <div class="lg:max-w-lg lg:space-y-8">
-              <h1 class="mb-5 text-3xl font-extrabold lg:text-6xl">
+              <h1 class="mb-5 text-xl md:text-3xl font-extrabold lg:text-6xl">
                 Welcome to the
                 <span
                   class="bg-gradient-to-r from-primary to-black-100 text-transparent bg-clip-text"
@@ -102,23 +102,25 @@
                 other type of categories, also enjoy the modern aesthetic
                 design.
               </p>
+             <div class=" flex justify-center md:justify-start lg:justify-start py-2">
               <label
-                class="input input-bordered flex items-center gap-2 w-4/5 rounded-full lg:py-8"
+              class="input input-bordered flex items-center  gap-2 w-4/5 rounded:2xl sm:rounded-full lg:py-8"
+            >
+              <input
+                id="searchPosts"
+                type="text"
+                class="grow text-gray-500 w-5/6"
+                placeholder="Search Here Anything..."
+              />
+              <button
+              onclick="handleSearchByCategory()"
+                id="searchPostsBtn"
+                class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg rounded-full lg:px-8 px-2 bg-primary text-white hover:text-primary hover:bg-gray-200 border-none"
               >
-                <input
-                  id="searchPosts"
-                  type="text"
-                  class="grow text-gray-500"
-                  placeholder="Search Here Anything..."
-                />
-                <button
-                onclick="handleSearchByCategory()"
-                  id="searchPostsBtn"
-                  class="btn rounded-full bg-primary text-white hover:text-primary hover:bg-blue-950"
-                >
-                  Search
-                </button>
-              </label>
+                Search
+              </button>
+            </label>
+             </div>
             </div>
             <div
               class="lg:max-w-md bg-white h-44 lg:h-52 lg:min-w-80 w-4/5 rounded-3xl flex flex-row items-center justify-evenly *:text-black lg:text-lg text-xs"

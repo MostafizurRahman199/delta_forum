@@ -118,17 +118,17 @@ const displayAllPost = (posts)=>{
 
         const div = document.createElement("div");
         div.innerHTML = `
-         <div class="flex items-start gap-4 bg-gray-100 sm:p-4 md:p-8 lg:p-12 rounded-2xl">
+         <div class="sm:flex gap-4 bg-gray-100 p-4 sm:p-4 md:p-8 lg:p-12 rounded-2xl">
               <!-- image -->
-               <div>
-                <div class="w-24 h-24 relative">
+               
+                <div class="w-24 h-24 relative ">
                   <img class="w-full h-full object-cover rounded-lg" src="${post.image}" alt="">
                   <img class="absolute top-[-8px] right-[-8px] w-5 h-5 " src="./images/${post.isActive ? 'avtive.png' : 'red.png'}" alt="">
                  </div>
                  
-               </div>
+               
                <!-- text -->
-                <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-4  mt-2">
                     <!-- category -->
                      <div class="flex items-center gap-2">
                       <p class="text-sm text-gray-400">#${post.category}</p>
